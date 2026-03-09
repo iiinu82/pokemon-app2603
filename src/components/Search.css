@@ -1,0 +1,29 @@
+.searchArea {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+
+label {
+  font-size: 20px;
+  font-weight: 700;
+  margin-right: 5px;
+  color: #6068e0;
+}
+
+input {
+  width: 80px;
+  border-radius: 5px;
+  border: 3px solid #6068e0;
+  color: #6068e0;
+}
+.startId {
+  margin-bottom: 8px;
+}
+
+.searchArea .button button {
+  font-size: 20px;
+  background-color: #7079ff;
+  padding: 3px 10px;
+}
