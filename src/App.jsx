@@ -186,21 +186,24 @@ function App() {
           </>
         )}
       </div>
-
-      <div className="choicePokemon">
-        <p className="title">選択したポケモンリスト</p>
-        <div className="pokemonCardContainer">
-          {choicePokemonData.map((pokemon) => {
-            return (
-              <Card
-                key={pokemon.id}
-                pokemon={pokemon}
-                onClick={() => openModal(pokemon)}
-              />
-            );
-          })}
+      {ids.length > 0 ? (
+        <div className="choicePokemon">
+          <p className="title">選択したポケモンリスト</p>
+          <div className="pokemonCardContainer">
+            {choicePokemonData.map((pokemon) => {
+              return (
+                <Card
+                  key={pokemon.id}
+                  pokemon={pokemon}
+                  onClick={() => openModal(pokemon)}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div></div>
+      )}
     </>
   );
 }
