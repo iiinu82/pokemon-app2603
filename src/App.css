@@ -10,7 +10,7 @@
   width: 95%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 20px;
 }
 
@@ -41,15 +41,20 @@ body {
 
 @media (max-width: 1400px) {
   .pokemonCardContainer {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 @media (max-width: 1150px) {
   .pokemonCardContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media (max-width: 890px) {
+  .pokemonCardContainer {
     grid-template-columns: 1fr 1fr;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 555px) {
   .pokemonCardContainer {
     grid-template-columns: 1fr;
   }
@@ -81,4 +86,17 @@ body {
   justify-content: center;
   text-align: center;
   font-size: 40px;
+}
+
+.choicePokemon {
+  margin-top: 50px;
+}
+
+.choicePokemon p.title {
+  color: rgb(21, 121, 41);
+  text-align: center;
+  display: block;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }

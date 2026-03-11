@@ -17,6 +17,11 @@ function App() {
   const [startId, setStartId] = useState(1);
   const [numberOfViews, setNumberOfViews] = useState(20);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
+  const [choicePokemonData, setChoicePokemonData] = useState([]);
+  // 戻した値を初期値に
+  const [ids, setIds] = useState(
+    JSON.parse(localStorage.getItem("pokemonIds")) || [],
+  );
 
   const GENERATION_START_IDS = {
     "赤・緑": 1,
@@ -34,16 +39,20 @@ function App() {
   const loadPokemon = async (data) => {
     let _pokemonData = await Promise.all(
       data.map((pokemon) => {
+        // console.log(pokemon.url);
+
         let pokemonRecord = getPokemon(pokemon.url);
         return pokemonRecord;
       }),
     );
+
     setPokemonData(_pokemonData);
   };
+  // https://pokeapi.co/api/v2/pokemon/1/
 
   const handleNext = async () => {
     setLoading(true);
-    console.log(nextData);
+    // console.log(nextData);
 
     let data = await getAllPokemon(nextData);
     await loadPokemon(data.results);
@@ -65,14 +74,36 @@ function App() {
   useEffect(() => {
     const fetchPokemonData = async () => {
       let res = await getAllPokemon(initialURL);
+      // console.log(res);
+
       loadPokemon(res.results);
       setNextData(res.next);
       setPrevData(res.previous);
 
       setLoading(false);
     };
+
     fetchPokemonData();
   }, []);
+
+  useEffect(() => {
+    const loadChoicePokemons = async () => {
+      const choicePokemons = ids.map((id) => {
+        return `https://pokeapi.co/api/v2/pokemon/${id}/`;
+      });
+
+      let _choicepokemonData = await Promise.all(
+        choicePokemons.map((pokemonUrl) => {
+          let choicePokemon = getPokemon(pokemonUrl);
+          return choicePokemon;
+        }),
+      );
+      console.log(_choicepokemonData);
+
+      setChoicePokemonData(_choicepokemonData);
+    };
+    loadChoicePokemons();
+  }, [ids]);
 
   const handleSearch = async (startId, numberOfViews) => {
     setLoading(true);
@@ -97,7 +128,7 @@ function App() {
     setSelectedPokemon(null);
   };
 
-  console.log(pokemonData);
+  // console.log(pokemonData);
 
   return (
     <>
@@ -146,10 +177,29 @@ function App() {
             </div>
             {/* モーダル表示 */}
             {selectedPokemon && (
-              <Modal pokemon={selectedPokemon} onClose={closeModal} />
+              <Modal
+                pokemon={selectedPokemon}
+                onClose={closeModal}
+                setIds={setIds}
+              />
             )}
           </>
         )}
+      </div>
+
+      <div className="choicePokemon">
+        <p className="title">選択したポケモンリスト</p>
+        <div className="pokemonCardContainer">
+          {choicePokemonData.map((pokemon) => {
+            return (
+              <Card
+                key={pokemon.id}
+                pokemon={pokemon}
+                onClick={() => openModal(pokemon)}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );

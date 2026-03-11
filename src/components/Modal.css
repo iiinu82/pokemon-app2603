@@ -12,12 +12,13 @@
 }
 
 .modal-content {
+  margin-top: 20px;
   background: white !important;
   padding: 2rem;
   border-radius: 12px !important;
   max-width: 400px;
   width: 90%;
-  height: 550px;
+  height: 560px;
   position: relative;
   text-align: center;
 }
@@ -30,4 +31,22 @@
   border: none;
   font-size: 2rem;
   cursor: pointer;
+}
+
+.NameButtonArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.NameButtonArea button {
+  padding: 0;
+  background-color: #00bd3f;
+  color: white;
+  width: 65px;
+  font-size: 10px;
+  height: 20px;
+  border: none;
+  border-radius: 3px;
+  margin-left: 15px;
 }

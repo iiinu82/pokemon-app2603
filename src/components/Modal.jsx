@@ -1,8 +1,27 @@
 import React from "react";
 import "./Modal.css";
 
-const Modal = ({ pokemon, onClose }) => {
+const Modal = ({ pokemon, onClose, setIds }) => {
   if (!pokemon) return null;
+  const saveIds = JSON.parse(localStorage.getItem("pokemonIds")) || [];
+  // localStorageに保存したいポケモンのIDを保存する
+  const handleSaveIds = () => {
+    // const saveIds = JSON.parse(localStorage.getItem("pokemonIds")) || [];
+
+    if (!saveIds.includes(pokemon.id)) {
+      saveIds.push(pokemon.id);
+      setIds(saveIds);
+      localStorage.setItem("pokemonIds", JSON.stringify(saveIds));
+    }
+  };
+
+  const handleDeleteIds = (id) => {
+    // const saveIds = JSON.parse(localStorage.getItem("pokemonIds")) || [];
+    const newIds = saveIds.filter((pokemonId) => pokemonId !== id);
+    localStorage.setItem("pokemonIds", JSON.stringify(newIds));
+    setIds(newIds);
+    onClose();
+  };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -11,7 +30,21 @@ const Modal = ({ pokemon, onClose }) => {
         <button className="modal-close" onClick={onClose}>
           ×
         </button>
-        <h2>{pokemon.name}</h2>
+        <div className="NameButtonArea">
+          <h2>
+            {pokemon.id} {pokemon.name}
+          </h2>
+          {!saveIds.includes(pokemon.id) ? (
+            <button onClick={() => handleSaveIds(pokemon.id)}>
+              リストに保存
+            </button>
+          ) : (
+            <button onClick={() => handleDeleteIds(pokemon.id)}>
+              リストから削除
+            </button>
+          )}
+        </div>
+
         <div>
           <img
             src={pokemon.sprites.front_default}
