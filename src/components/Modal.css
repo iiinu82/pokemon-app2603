@@ -14,39 +14,45 @@
 .modal-content {
   margin-top: 20px;
   background: white !important;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 12px !important;
   max-width: 400px;
   width: 90%;
-  height: 560px;
+  height: 580px;
   position: relative;
   text-align: center;
 }
 
 .modal-close {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  color: black;
+  top: 0;
+  right: 10px;
   background: none;
   border: none;
   font-size: 2rem;
   cursor: pointer;
 }
 
-.NameButtonArea {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.NameButtonArea button {
-  padding: 0;
-  background-color: #00bd3f;
+.listButton {
+  padding: 3px 5px;
+  background-color: #009e35;
   color: white;
-  width: 65px;
-  font-size: 10px;
-  height: 20px;
+  width: 90px;
+  font-size: 12px;
+  height: 28px;
   border: none;
   border-radius: 3px;
-  margin-left: 15px;
+  position: absolute;
+  right: 10px;
+  bottom: 15px;
+}
+
+.IdNameArea {
+  display: flex;
+  justify-content: center;
+}
+.IdNameArea .Id {
+  font-size: 28px;
+  margin-right: 10px;
 }

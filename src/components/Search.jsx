@@ -16,6 +16,7 @@ const Search = ({
           <input
             type="number"
             min="1"
+            max="1025"
             value={startId}
             onChange={(e) => setStartId(e.target.value)}
           />

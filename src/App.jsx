@@ -6,6 +6,7 @@ import Card from "./components/Card";
 import Modal from "./components/Modal";
 import MyNavbar from "./components/MyNavbar";
 import Search from "./components/Search";
+import pokemonNameList from "./pokemonNameList";
 
 function App() {
   const initialURL = "https://pokeapi.co/api/v2/pokemon";
@@ -128,7 +129,7 @@ function App() {
     setSelectedPokemon(null);
   };
 
-  // console.log(pokemonData);
+  console.log(pokemonData);
 
   return (
     <>
@@ -157,24 +158,30 @@ function App() {
             {/* ネクストプレブボタン */}
             <div className="button">
               {prevData && <button onClick={handlePrev}>prev</button>}
-              <button onClick={handleNext}>next</button>
+              {nextData && <button onClick={handleNext}>next</button>}
             </div>
+            {/* カードコンテナ */}
             <div className="pokemonCardContainer">
               {pokemonData.map((pokemon, i) => {
+                let jpName = pokemonNameList[pokemon.name];
                 return (
                   <Card
                     key={i}
                     pokemon={pokemon}
                     onClick={() => openModal(pokemon)}
+                    jpName={jpName}
+                    color="white"
                   />
                 );
               })}
             </div>
+
             {/* ネクストプレブボタン */}
             <div className="button">
               {prevData && <button onClick={handlePrev}>prev</button>}
-              <button onClick={handleNext}>next</button>
+              {nextData && <button onClick={handleNext}>next</button>}
             </div>
+
             {/* モーダル表示 */}
             {selectedPokemon && (
               <Modal
@@ -191,11 +198,14 @@ function App() {
           <p className="title">選択したポケモンリスト</p>
           <div className="pokemonCardContainer">
             {choicePokemonData.map((pokemon) => {
+              let jpName = pokemonNameList[pokemon.name];
               return (
                 <Card
                   key={pokemon.id}
                   pokemon={pokemon}
                   onClick={() => openModal(pokemon)}
+                  jpName={jpName}
+                  color="#fdffb9"
                 />
               );
             })}

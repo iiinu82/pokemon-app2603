@@ -1,13 +1,18 @@
-const Card = ({ pokemon, onClick }) => {
+const Card = ({ pokemon, onClick, jpName, color }) => {
   return (
-    <div className="card" onClick={onClick} style={{ cursor: "pointer" }}>
+    <div
+      className="card"
+      onClick={onClick}
+      style={{ cursor: "pointer", backgroundColor: color }}
+    >
       <div className="cardImg">
         <img src={pokemon.sprites.front_default} alt="" />
         <img src={pokemon.sprites.back_default} alt="" />
       </div>
       <h3 className="cardName">
-        {pokemon.id} {pokemon.name}
+        {pokemon.id} {jpName}
       </h3>
+
       <div className="cardType">
         <div>タイプ</div>
         {pokemon.types.map((type, i) => {

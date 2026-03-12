@@ -30,19 +30,10 @@ const Modal = ({ pokemon, onClose, setIds }) => {
         <button className="modal-close" onClick={onClose}>
           ×
         </button>
-        <div className="NameButtonArea">
-          <h2>
-            {pokemon.id} {pokemon.name}
-          </h2>
-          {!saveIds.includes(pokemon.id) ? (
-            <button onClick={() => handleSaveIds(pokemon.id)}>
-              リストに保存
-            </button>
-          ) : (
-            <button onClick={() => handleDeleteIds(pokemon.id)}>
-              リストから削除
-            </button>
-          )}
+
+        <div className="IdNameArea">
+          <p className="Id">{pokemon.id}</p>
+          <h2>{pokemon.name}</h2>
         </div>
 
         <div>
@@ -61,8 +52,23 @@ const Modal = ({ pokemon, onClose, setIds }) => {
           <img
             src={pokemon.sprites.other["official-artwork"].front_default}
             width="150px"
-          />
+          />{" "}
         </div>
+        {!saveIds.includes(pokemon.id) ? (
+          <button
+            className="listButton"
+            onClick={() => handleSaveIds(pokemon.id)}
+          >
+            リストに保存
+          </button>
+        ) : (
+          <button
+            className="listButton"
+            onClick={() => handleDeleteIds(pokemon.id)}
+          >
+            リストから削除
+          </button>
+        )}
       </div>
     </div>
   );
